@@ -10,6 +10,8 @@ variable "Route_table_config" {}
 
 variable "route_table_association" {}
 
+variable "security_group_config" {}
+
 # variable "subnet_id" {}
 
 # variable "route_table_id" {}

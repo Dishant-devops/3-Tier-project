@@ -1,6 +1,6 @@
 ## VPC Module
 module "vpc_module" {
-  source     = "./modules/vpc"
+  source     = "../../modules/vpc"
   for_each   = var.vpc_config
   cidr_block = each.value.cidr_block
 
@@ -10,7 +10,7 @@ module "vpc_module" {
 
 ## Subnet Module
 module "subnet_module" {
-  source            = "./modules/subnet"
+  source            = "../../modules/subnet"
   for_each          = var.subnet_config
   subnet_cidr_block = each.value.subnet_cidr_block
   vpc_id            = module.vpc_module["vpc1"].vpc_id
@@ -18,9 +18,25 @@ module "subnet_module" {
   availability_zone = each.value.availability_zone
 }
 
+## security Group
+module "security_Group" {
+
+  source      = "../../modules/SG"
+  for_each    = var.security_group_config
+  vpc_id      = module.vpc_module["vpc1"].vpc_id
+  sg_name     = each.value.sg_name
+  description = each.value.description
+  tag         = each.value.tag
+
+  ingress_rules = each.value.ingress_rules
+  egress_rules  = each.value.egress_rules
+}
+
+
+
 ## Internat Gateway
 module "internet_gateway" {
-  source                = "./modules/internet_gateway"
+  source                = "../../modules/internet_gateway"
   for_each              = var.internat_gateway_config
   vpc_id                = module.vpc_module["vpc1"].vpc_id
   internet_gateway_tags = each.value.internet_gateway_tags
@@ -28,7 +44,7 @@ module "internet_gateway" {
 
 ## Nat Gateway
 module "Nat_Gateway" {
-  source    = "./modules/nat_gateway"
+  source    = "../../modules/nat_gateway"
   for_each  = var.Nat_gateway_Config
   subnet_id = module.subnet_module[each.value.subnet_name].subnet_id
   aws_nat_gateway_tags = {
@@ -39,7 +55,7 @@ module "Nat_Gateway" {
 
 ## Route Table
 module "route_table_module" {
-  source     = "./modules/Route_table"
+  source     = "../../modules/Route_table"
   for_each   = var.Route_table_config
   vpc_id     = module.vpc_module["vpc1"].vpc_id
   gateway_id = each.value.private == 0 ? module.internet_gateway[each.value.gateway_name].internetGW_id : module.Nat_Gateway[each.value.gateway_name].natGW_id
@@ -50,7 +66,7 @@ module "route_table_module" {
 
 ## Route Table Subnet Association 
 module "route_table_association" {
-  source         = "./modules/Route_table_association"
+  source         = "../../modules/Route_table_association"
   for_each       = var.route_table_association
   subnet_id      = module.subnet_module[each.value.subnet_name].subnet_id
   route_table_id = module.route_table_module[each.value.route_table_name].route_table_id
@@ -59,23 +75,24 @@ module "route_table_association" {
 
 ## Iam role for eks 
 module "iam" {
-  source       = "./modules/iam-eks"
+  source       = "../../modules/iam-eks"
   cluster_name = var.cluster_name
 }
 
 ## EKS
 module "eks_cluster" {
-  source       = "./modules/eks"
+  source       = "../../modules/eks"
   cluster_name = var.cluster_name
-private_subnet_ids = [
+  private_subnet_ids = [
     for key, subnet in module.subnet_module : subnet.subnet_id
     if can(regex("private", key))
   ]
-  cluster_role_arn   = module.iam.cluster_role_arn
-  node_role_arn      = module.iam.node_role_arn
-  min_size           = var.min_size
-  max_size           = var.max_size
-  desired_size       = var.desired_size
-  instance_types     = ["t3.medium"]
-  depends_on         = [module.iam]
+  cluster_sg_ids = [module.security_Group["Eks_sg"].security_group_id]
+  cluster_role_arn = module.iam.cluster_role_arn
+  node_role_arn    = module.iam.node_role_arn
+  min_size         = var.min_size
+  max_size         = var.max_size
+  desired_size     = var.desired_size
+  instance_types   = ["t3.medium"]
+  depends_on       = [module.iam]
 }

@@ -6,3 +6,5 @@ variable "desired_size" {}
 variable "max_size" {}
 variable "min_size" {}
 variable "instance_types" {}
+variable "cluster_sg_ids" {}   
+//variable "node_sg_ids" {}
