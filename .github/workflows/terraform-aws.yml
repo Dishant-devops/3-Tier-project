@@ -2,7 +2,7 @@ name: 'Terraform AWS Deploy'
 
 on:
   push:
-    branches: [ "main" , "Dev-Infra" ]
+    branches: [ "main" , "Dev-infra" ]
   pull_request:
      branches: ["main"]
 
@@ -12,7 +12,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-1        
-  TF_WORKING_DIR: .Infra/Environment/Dev        
+  TF_WORKING_DIR: ./Infra/Environment/Dev        
 
 jobs:
   terraform:
