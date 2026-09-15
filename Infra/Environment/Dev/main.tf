@@ -87,7 +87,7 @@ module "eks_cluster" {
     for key, subnet in module.subnet_module : subnet.subnet_id
     if can(regex("private", key))
   ]
-  cluster_sg_ids = [module.security_Group["Eks_sg"].security_group_id]
+  cluster_sg_ids   = [module.security_Group["Eks_sg"].security_group_id]
   cluster_role_arn = module.iam.cluster_role_arn
   node_role_arn    = module.iam.node_role_arn
   min_size         = var.min_size

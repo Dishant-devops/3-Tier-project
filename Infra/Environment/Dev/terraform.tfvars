@@ -116,7 +116,7 @@ subnet_config = {
 # Security Group
 security_group_config = {
   "Eks_sg" = {
-    sg_name      = "Eks_sg"
+    sg_name     = "Eks_sg"
     description = "This sg for Eks"
     tag = {
       name = "eks-sg"
@@ -124,24 +124,24 @@ security_group_config = {
     ingress_rules = {
       http_from_vpc = {
         description = "Allow http port in"
-        cidr_ipv4    = "10.0.0.0/16"
-        from_port    = 80
-        to_port      = 80
-        ip_protocol  = "tcp"
+        cidr_ipv4   = "10.0.0.0/16"
+        from_port   = 80
+        to_port     = 80
+        ip_protocol = "tcp"
       }
       https_from_vpc = {
         description = "Allow https port"
-        cidr_ipv4    = "10.0.0.0/16"
-        from_port    = 443
-        to_port      = 443
-        ip_protocol  = "tcp"
+        cidr_ipv4   = "10.0.0.0/16"
+        from_port   = 443
+        to_port     = 443
+        ip_protocol = "tcp"
       }
     }
     egress_rules = {
       all_traffic = {
         description = "Allow all outbound traffic"
-        cidr_ipv4    = "10.0.0.0/16"
-        ip_protocol  = "-1"
+        cidr_ipv4   = "10.0.0.0/16"
+        ip_protocol = "-1"
       }
     }
   }
