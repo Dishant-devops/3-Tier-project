@@ -2,7 +2,7 @@ name: 'Terraform AWS Deploy'
 
 on:
   push:
-    branches: [ "main" , "CI" ]
+    branches: [ "main" , "Dev-Infra" ]
   pull_request:
      branches: ["main"]
 
