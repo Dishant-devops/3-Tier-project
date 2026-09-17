@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 3-tier-app-service
+  namespace: 3-tier
+spec:
+  type: ClusterIP
+  selector:
+    app: 3-tier-app
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
