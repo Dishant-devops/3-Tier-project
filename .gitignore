@@ -5,4 +5,4 @@
 *.tfstate.backup
 *.env
 node_modules/
-secrets.yml
+*secrets.yml
