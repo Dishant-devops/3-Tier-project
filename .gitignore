@@ -3,3 +3,6 @@
 *.tfstate
 *.tfstate.*
 *.tfstate.backup
+*.env
+node_modules/
+*secrets.yml

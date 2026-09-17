@@ -7,7 +7,7 @@ resource "aws_eks_cluster" "main" {
     subnet_ids = var.private_subnet_ids 
     security_group_ids = var.cluster_sg_ids 
     
-    # Optional: Enable public access to the API server so you can run kubectl from your laptop
+    
     endpoint_public_access = true 
     endpoint_private_access = true
   }
@@ -18,7 +18,7 @@ resource "aws_eks_node_group" "main" {
   node_group_name = "${var.cluster_name}-node-group"
   node_role_arn   = var.node_role_arn 
   
-  # CRITICAL: Worker nodes must be in private subnets
+ 
   subnet_ids      = var.private_subnet_ids 
   
 
