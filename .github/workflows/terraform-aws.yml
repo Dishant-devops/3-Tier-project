@@ -6,8 +6,8 @@ on:
   pull_request:
      branches: ["main"]
 
-  paths:
-      - 'Infra/**'  
+     paths:
+         - 'Infra/**'  
 
 permissions:
   id-token: write  
