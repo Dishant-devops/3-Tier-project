@@ -45,7 +45,7 @@ jobs:
 
       - name: Create namespace if not exists
         run: |
-          kubectl create namespace $NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace $NAMESPACE --dry-run=client -o yml | kubectl apply -f -
 
       - name: Create secret.yml from secrets
         run: |
@@ -72,7 +72,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.event.workflow_run.run_number }}
         run: |
-          sed -i "s|IMAGE_PLACEHOLDER|$DOCKERHUB_REPO:$IMAGE_TAG|g" $K8S_MANIFESTS_DIR/deployment.yaml
+          sed -i "s|IMAGE_PLACEHOLDER|$DOCKERHUB_REPO:$IMAGE_TAG|g" $K8S_MANIFESTS_DIR/deployment.yml
 
       - name: Deploy to EKS
         run: |
