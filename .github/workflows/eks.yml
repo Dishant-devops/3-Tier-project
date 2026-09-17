@@ -45,7 +45,7 @@ jobs:
 
       - name: Create namespace if not exists
         run: |
-          kubectl create namespace $NAMESPACE --dry-run=client -o yml | kubectl apply -f -
+          kubectl create namespace $NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Create secret.yml from secrets
         run: |
