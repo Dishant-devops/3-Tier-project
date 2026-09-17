@@ -6,7 +6,9 @@ on:
 
   pull_request:
     branches: ["main"]
-
+    
+  paths:
+      - '3-Tier-Full-Stack/**' 
 permissions:
   contents: read
 
