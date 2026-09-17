@@ -1,9 +1,9 @@
-# terraform {
-#   backend "s3" {
-#     bucket = "vpc-terraform-state-file-bucket"
-#     key    = "eks-prod/terraform.tfstate"
-#     region = "us-east-1"
-
-#     encrypt = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "my-bucket-782989862342-us-east-1-an"
+    key    = "dev/terraform.tfstate"
+    region = "us-east-1"
+    encrypt = true
+    use_lockfile = true   # S3 native locking 
+  }
+}
