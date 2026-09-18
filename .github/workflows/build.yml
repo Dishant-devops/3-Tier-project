@@ -3,6 +3,8 @@ name: 'Build and Push to Docker Hub'
 on:
   push:
     branches: [ "Dev-infra" , "main" ]
+    paths:
+        - '3-Tier-Full-Stack/**'
 
   pull_request:
     branches: ["main"]
