@@ -5,11 +5,14 @@ on:
     branches: [ "main" , "Dev-infra" ]
     paths:
         - 'Infra/**'
+        - '.github/workflows/terraform-aws.yml'
+
   pull_request:
      branches: ["main"]
 
      paths:
          - 'Infra/**'  
+         - '.github/workflows/terraform-aws.yml'
 
 permissions:
   id-token: write  
