@@ -6,6 +6,17 @@ on:
     types:
       - completed
 
+  push:
+    branches: [ "main", "Dev-infra" ]
+    paths:
+      - '.github/workflows/eks.yml'
+      - 'deployment/**'
+  pull_request:
+    branches: [ "main", "Dev-infra" ]
+    paths:
+      - '.github/workflows/eks.yml'
+      - 'deployment/**'
+
 permissions:
   id-token: write   # Required for AWS OIDC
   contents: read

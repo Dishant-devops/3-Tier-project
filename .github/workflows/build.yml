@@ -5,12 +5,14 @@ on:
     branches: [ "Dev-infra" , "main" ]
     paths:
         - '3-Tier-Full-Stack/**'
+        - '.github/workflows/build.yml'
 
   pull_request:
     branches: ["main"]
     
     paths:
         - '3-Tier-Full-Stack/**' 
+        - '.github/workflows/build.yml'
 permissions:
   contents: read
 
