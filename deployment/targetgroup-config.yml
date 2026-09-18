@@ -1,0 +1,11 @@
+apiVersion: gateway.k8s.aws/v1
+kind: TargetGroupConfiguration
+metadata:
+  name: 3tier-app-tg
+  namespace: 3-tier
+spec:
+  targetReference:
+    name: 3-tier-app-service
+
+  defaultConfiguration:
+    targetType: ip

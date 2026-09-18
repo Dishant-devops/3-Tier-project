@@ -3,4 +3,9 @@ kind: GatewayClass
 metadata:
   name: amazon-vpc-alb
 spec:
-  controllerName: eks.amazonaws.com/alb
+  controllerName: gateway.k8s.aws/alb
+  parametersRef:
+    group: gateway.k8s.aws
+    kind: LoadBalancerConfiguration
+    name: internet-facing-config
+    namespace: 3-tier

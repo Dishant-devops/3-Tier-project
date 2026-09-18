@@ -3,11 +3,11 @@ kind: Gateway
 metadata:
   name: my-3tier-gateway
   namespace: 3-tier
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+  
 spec:
   gatewayClassName: amazon-vpc-alb
+
+ 
   listeners:
   - name: http
     protocol: HTTP
